@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>My Page</title>
+	<!-- Add any dependencies here -->
+	<style type="text/css">
+		.red {
+			color: red;
+		}
+	</style>
+
+</head>
+
+<body>
+	<button>hi</button>
+	<p class="red">hello</p>
+	<p class="red">hello1</p>
+	<p class="red">hello2</p>
+	<p class="red">hello3</p>
+	<p class="red">hello4</p>
+	<p class="red">hello5</p>
+	<p class="red">hello6</p>
+	<script>
+		$('button').click(toggle);
+
+		var data = [30,35,45,55,70];
+		function toggle(){
+			if (data.length > 6) {
+				console.log(data)
+				data = [30,35,45,55,70];
+				d3.selectAll("p").data(data).exit().remove(); // need to rebind the data
+			} else {
+				console.log(data);
+				data = [50,55,45,35,20,25,40,80];
+				d3.selectAll("p").data(data).enter().append("p").text(function(d) { return "I’m number " + d + "!"; });
+				// d3.selectAll("p").data(data).enter().append("p").text(function(d) { return "I’m number " + d + "!"; });
+			}
+		}
+
+		// is this reactive?
+
+		// var dataArray1 = [30,35,45,55,70];
+		// var dataArray2 = [50,55,45,35,20,25,25,40];
+
+		d3.selectAll("p")
+		.data(data);
+
+		d3.selectAll("p")
+		.style("font-size", function(d) { return d + "px"; })
+		d3.selectAll("p").enter().append("p")
+		.text(function(d) { return "I’m number " + d + "!"; });
+
+		d3.selectAll("p").data([30, 20, 25, 40, 80]).transition().style("font-size", function(d) { return d + "px"; })
+	</script>
+</body>
+</html>

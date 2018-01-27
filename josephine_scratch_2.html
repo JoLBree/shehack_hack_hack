@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+	.chart rect {
+		fill: steelblue;
+	}
+
+	.chart text {
+		fill: white;
+		font: 10px sans-serif;
+		text-anchor: end;
+	}
+
+</style>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<button>hi</button>
+<svg class="chart"></svg>
+<script>
+
+	// var data = [
+	// {'name':'a','value':4},
+	// {'name':'b','value':8},
+	// {'name':'c','value':15},
+	// {'name':'d','value':16},
+	// {'name':'e','value':23},
+	// {'name':'f','value':42}
+	// ];
+
+	var data = [4, 8, 15, 16, 23, 42];
+
+	var width = 420,
+	barHeight = 20;
+
+	var x = d3.scaleLinear()
+	.domain([0, d3.max(data)])
+	.range([0, width]);
+
+	var chart = d3.select(".chart")
+	.attr("width", width)
+	.attr("height", barHeight * data.length);
+
+	function updateGraph(bar) {
+		bar.append("rect")
+		.attr("width", x)
+		.attr("height", barHeight - 1);
+
+		bar.append("text")
+		.attr("x", function(d) { return x(d) - 3; })
+		.attr("y", barHeight / 2)
+		.attr("dy", ".35em")
+		.text(function(d) { return d; });
+
+	}
+
+	var bar = chart.selectAll("g").data(data).enter().append("g")
+		.attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+	
+	updateGraph(bar)
+
+	
+
+	var newData = [14, 3, 10, 10, 13, 24];
+	updateGraph(bar.selectAll("g").data(newData).transition())
+
+
+</script>
