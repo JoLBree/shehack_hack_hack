@@ -22,10 +22,6 @@ const kraken = require('kraken-js');
 const app = express();
 app.use(kraken());
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello, world!').end();
-});
-
 // Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

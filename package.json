@@ -11,8 +11,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "4.15.4",
-    "kraken-js": "^1.0.1"
+    "express": "^4.15.4",
+    "kraken-js": "^2.1.0"
   },
   "cloud-repo-tools": {
     "test": {
