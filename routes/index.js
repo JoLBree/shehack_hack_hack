@@ -1,8 +1,8 @@
 module.exports = function (router) {
 
+    const path = require('path');
+
     router.get('/', (req, res) => {
-
-        res.status(200).send('Hello, world!').end();
-
+        res.sendFile(path.join(__dirname + '/../src/views/index.html'));
     });
 }

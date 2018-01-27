@@ -20,6 +20,8 @@ const express = require('express');
 const kraken = require('kraken-js');
 
 const app = express();
+app.use(express.static('src'))
+app.use(express.static('dist'))
 app.use(kraken());
 
 // Start the server
