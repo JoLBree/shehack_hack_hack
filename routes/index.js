@@ -5,4 +5,8 @@ module.exports = function (router) {
     router.get('/', (req, res) => {
         res.sendFile(path.join(__dirname + '/../src/views/index.html'));
     });
+
+    router.get('/breathe', (req, res) => {
+        res.sendFile(path.join(__dirname + '/../src/views/breathe.html'));
+    });
 }
