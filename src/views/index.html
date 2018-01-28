@@ -2,11 +2,48 @@
 <head>
     <title>My Page</title>
     <link rel="stylesheet" type="text/css" href="/styles/main.css">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 </head>
 
 <body>
-    <div>
-        Hello World
-    </div>
+    <a-scene>
+        <a-camera>
+            <a-cursor color="green" fuse="true" fuseTimeout="3000"></a-cursor>
+        </a-camera>
+
+        <a-text id="frontText" value="Front" align="center" color="#FFF" visible="true" position="0 2 -3"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="0 2 -3" rotation="0 0 -90" width="1" height="1" color="red" onclick="changeText('frontText')"></a-plane>
+
+        <a-text id="rightText" value="Right" align="center" color="#FFF" visible="true" position="3 2 0" rotation="0 -90 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="3 2 0" rotation="0 -90 0" width="1" height="1" color="red" onclick="changeText('rightText')"></a-plane>
+
+        <a-text id="backText" value="Back" align="center" color="#FFF" visible="true" position="0 2 3" rotation="0 180 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="0 2 3" rotation="0 180 0" width="1" height="1" color="red" onclick="changeText('backText')"></a-plane>
+
+        <a-text id="leftText" value="Left" align="center" color="#FFF" visible="true" position="-3 2 0" rotation="0 90 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="-3 2 0" rotation="0 90 0" width="1" height="1" color="red" onclick="changeText('leftText')"></a-plane>
+
+        <a-sky color="#3a3b42"></a-sky>
+    </a-scene>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/scripts/aframing.js"></script>
 </body>
 </html>
