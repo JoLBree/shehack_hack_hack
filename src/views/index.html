@@ -12,33 +12,35 @@
             <a-cursor color="green" fuse="true" fuseTimeout="3000"></a-cursor>
         </a-camera>
 
-        <a-text id="frontText" value="Front" align="center" color="#FFF" visible="true" position="0 2 -3"
-                opacity="1">
-            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
-            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
-        </a-text>
-        <a-plane position="0 2 -3" rotation="0 0 -90" width="1" height="1" color="red" onclick="changeText('frontText')"></a-plane>
+        <a-assets>
+            <a-mixin id="text"
+                     text="align: center; width: 6; color: #FFF; wrap-count: 20;">
+            </a-mixin>
+        </a-assets>
 
-        <a-text id="rightText" value="Right" align="center" color="#FFF" visible="true" position="3 2 0" rotation="0 -90 0"
-                opacity="1">
+        <a-text id="frontText" mixin="text" value="Front" visible="true" position="0 1.7 -5" opacity="1">
             <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
             <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
         </a-text>
-        <a-plane position="3 2 0" rotation="0 -90 0" width="1" height="1" color="red" onclick="changeText('rightText')"></a-plane>
+        <a-plane position="0 1.7 -5" rotation="0 0 -90" width="1" height="1" color="red" onclick="changeText('frontText')"></a-plane>
 
-        <a-text id="backText" value="Back" align="center" color="#FFF" visible="true" position="0 2 3" rotation="0 180 0"
-                opacity="1">
+        <a-text id="rightText" mixin="text" value="Right" visible="true" position="5 1.7 0" rotation="0 -90 0" opacity="1">
             <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
             <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
         </a-text>
-        <a-plane position="0 2 3" rotation="0 180 0" width="1" height="1" color="red" onclick="changeText('backText')"></a-plane>
+        <a-plane position="5 1.7 0" rotation="0 -90 0" width="1" height="1" color="red" onclick="changeText('rightText')"></a-plane>
 
-        <a-text id="leftText" value="Left" align="center" color="#FFF" visible="true" position="-3 2 0" rotation="0 90 0"
-                opacity="1">
+        <a-text id="backText" mixin="text" value="Back" visible="true" position="0 1.7 5" rotation="0 180 0" opacity="1">
             <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
             <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
         </a-text>
-        <a-plane position="-3 2 0" rotation="0 90 0" width="1" height="1" color="red" onclick="changeText('leftText')"></a-plane>
+        <a-plane position="0 1.7 5" rotation="0 180 0" width="1" height="1" color="red" onclick="changeText('backText')"></a-plane>
+
+        <a-text id="leftText" mixin="text" value="Left" visible="true" position="-5 1.7 0" rotation="0 90 0" opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="-5 1.7 0" rotation="0 90 0" width="1" height="1" color="red" onclick="changeText('leftText')"></a-plane>
 
         <a-sky color="#3a3b42"></a-sky>
     
