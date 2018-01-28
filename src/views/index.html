@@ -2,11 +2,101 @@
 <head>
     <title>My Page</title>
     <link rel="stylesheet" type="text/css" href="/styles/main.css">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 
 <body>
-    <div>
-        Hello World
-    </div>
+    <a-scene>
+        <a-camera>
+            <a-cursor color="green" fuse="true" fuseTimeout="3000"></a-cursor>
+        </a-camera>
+
+        <a-text id="frontText" value="Front" align="center" color="#FFF" visible="true" position="0 2 -3"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="0 2 -3" rotation="0 0 -90" width="1" height="1" color="red" onclick="changeText('frontText')"></a-plane>
+
+        <a-text id="rightText" value="Right" align="center" color="#FFF" visible="true" position="3 2 0" rotation="0 -90 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="3 2 0" rotation="0 -90 0" width="1" height="1" color="red" onclick="changeText('rightText')"></a-plane>
+
+        <a-text id="backText" value="Back" align="center" color="#FFF" visible="true" position="0 2 3" rotation="0 180 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="0 2 3" rotation="0 180 0" width="1" height="1" color="red" onclick="changeText('backText')"></a-plane>
+
+        <a-text id="leftText" value="Left" align="center" color="#FFF" visible="true" position="-3 2 0" rotation="0 90 0"
+                opacity="1">
+            <a-animation attribute="opacity" dur="2000" begin="fadeOut" to="0"></a-animation>
+            <a-animation attribute="opacity" dur="2000" begin="fadeIn" to="1"></a-animation>
+        </a-text>
+        <a-plane position="-3 2 0" rotation="0 90 0" width="1" height="1" color="red" onclick="changeText('leftText')"></a-plane>
+
+        <a-sky color="#3a3b42"></a-sky>
+    
+        <script type="text/javascript">
+            var num_circles = 50;
+
+            var circle_data = d3.range(num_circles)
+              .map(function(i) {
+                return {
+                  cos: Math.cos(i*((2*Math.PI)/num_circles)),
+                  sin: Math.sin(i*((2*Math.PI)/num_circles))
+                }
+              });
+
+            var r = 1.25;
+            var start_radius = 0.1;
+
+            var start_scale = d3.scaleLinear()
+              .domain([-1, 1])
+              .range([-start_radius, start_radius]);
+
+            var end_scale = d3.scaleLinear()
+              .domain([-1, 1])
+              .range([-r, r]);
+            
+            var circles = d3.select("a-scene")
+              .selectAll("a-sphere")
+              .data(circle_data)
+              .enter()
+              .append("a-sphere")
+              .attr("radius",0.025)
+              .attr("color", "#f1f2f3");
+
+            function circleTransition(){
+              circles
+                .attr("position", function(d){
+                  return start_scale(d.cos)+" 0 "+start_scale(d.sin);})
+                .transition()
+                .duration(6000)
+                .ease(d3.easeCubicInOut)
+                .attrTween("position", function(d) {
+                    return d3.interpolateString(start_scale(d.cos)+" 0 "+start_scale(d.sin),
+                    end_scale(d.cos)+" 0 "+end_scale(d.sin));})
+                .transition()
+                .duration(6000)
+                .ease(d3.easeCubicInOut)
+                .attrTween("position", function(d) {
+                    return d3.interpolateString(end_scale(d.cos)+" 0 "+end_scale(d.sin),
+                    start_scale(d.cos)+" 0 "+start_scale(d.sin));})
+                .on("end", circleTransition);
+              }
+
+              circleTransition();
+        </script>
+    </a-scene>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/scripts/aframing.js"></script>
 </body>
 </html>

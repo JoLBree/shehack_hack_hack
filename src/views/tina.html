@@ -1,19 +1,39 @@
 <html lang="en">
 <head>
 	<title>My Page</title>
-<!-- Add any dependencies here -->
-	<style type="text/css">
-		.red {
-			color: red;
-		}
-	</style>
-
+	<link rel="stylesheet" type="text/css" href="/styles/main.css">
+	<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
 </head>
 
 <body>
-	<p class="red">hello</p>
-	<script>
-		console.log('hello!');
-	</script>
+<div>
+	Hello World
+</div>
+<a-scene>
+	<a-box static-body position="-1 0.5 -3" rotation="0 45 0" color="green" shadow
+		   onclick="this.setAttribute('color', 'purple')"></a-box>
+	<a-sphere id="sphere" dynamic-body position="0 2.6 -5" radius="1.25"
+			  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Equirectangular_projection_SW.jpg/1280px-Equirectangular_projection_SW.jpg"
+			  onclick="this.setAttribute('color', 'purple')"
+			  shadow></a-sphere>
+	<a-camera>
+		<a-cursor color="green"></a-cursor>
+	</a-camera>
+	<a-plane static-body position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+	<a-plane static-body position="0 1 -6" rotation="0 0 -90" width="4" height="4" color="red" shadow></a-plane>
+	<a-text id="cylinderText" value="Front" align="center" color="#FFF" visible="true" position="0 2 -3"
+			material="color: #333"></a-text>
+
+	<a-text id="right" static-body value="Right" align="center" color="#FFF" visible="true" position="3 2 0" rotation="0 -90 0"
+			material="color: #333" onclick="this.setAttribute('value', 'clicked')"></a-text>
+
+	<a-text value="Back" align="center" color="#FFF" visible="true" position="0 2 3" rotation="0 180 0"
+			material="color: #333"></a-text>
+	<a-text value="Left" align="center" color="#FFF" visible="true" position="-3 2 0" rotation="0 90 0"
+			material="color: #333"></a-text>
+
+
+	<a-sky src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Equirectangular_projection_SW.jpg/1280px-Equirectangular_projection_SW.jpg"></a-sky>
+</a-scene>
 </body>
 </html>
