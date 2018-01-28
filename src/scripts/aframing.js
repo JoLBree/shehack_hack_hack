@@ -43,7 +43,6 @@ function changeText(elemId) {
         document.querySelector('#' + elemId).emit('fadeIn');
     }, 2100);
     textObj[elemId].arrInd = elemTextObj.arrInd + 1;
-    }
 }
 
 function introProceed() {
