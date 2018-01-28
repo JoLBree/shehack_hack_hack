@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Breathing Animation</title>
+  <meta name="description" content="Breathing Animation">
+  <meta name="author" content="Brooke Fitzgerald">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<style>
+html, body, svg, div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+</style>
+
+<body>
+    <svg >
+      <rect width="100%" height="100%" fill="#3a3b42"/>
+    </svg>
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script type="text/javascript">
+    var num_circles = 50;
+
+    var circle_data = d3.range(num_circles)
+      .map(function(i) {
+        return {
+          cos: Math.cos(i*((2*Math.PI)/num_circles)),
+          sin: Math.sin(i*((2*Math.PI)/num_circles))
+        }
+      });
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var screen_size = Math.min(w-20,h-20);
+    var start_radius = 20;
+
+    var start_w_scale = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([w/2-start_radius, w/2+start_radius]);
+    
+    var end_w_scale = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([(w-screen_size)/2, w-((w-screen_size)/2)]);
+
+    var start_h_scale = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([h/2-start_radius, h/2+start_radius]);
+
+    var end_h_scale = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([(h-screen_size)/2, h-((h-screen_size)/2)]);
+    
+    var circles = d3.select("svg")
+      .attr("width",w)
+      .attr("height",h)
+      .selectAll("circle")
+      .data(circle_data)
+      .enter()
+      .append("circle")
+      .attr("r",10)
+      .attr("fill", "#f1f2f3");
+
+    function circleTransition(){
+      circles
+        .attr("cx", function(d){
+          return start_w_scale(d.cos);})
+        .attr("cy", function(d){
+          return start_h_scale(d.sin);})
+        .transition()
+        .duration(6000)
+        .ease(d3.easeCubicInOut)
+        .attr("cx", function(d){
+          return end_w_scale(d.cos);})
+        .attr("cy", function(d){
+          return end_h_scale(d.sin);})
+        .transition()
+        .duration(6000)
+        .ease(d3.easeCubicInOut)
+        .attr("cx", function(d){
+          return start_w_scale(d.cos);})
+        .attr("cy", function(d){
+          return start_h_scale(d.sin);})
+        .on("end", circleTransition);
+      }
+
+      circleTransition();
+  </script>
+</html>
