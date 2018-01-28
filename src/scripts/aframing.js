@@ -34,14 +34,18 @@ let textObj = {
 
 function changeText(elemId) {
     let elemTextObj = textObj[elemId];
-    console.log(elemTextObj)
     if (!(elemTextObj && elemTextObj.arrInd < elemTextObj.arrSize)) {
         textObj[elemId].arrInd = 0;
     } 
-    document.querySelector('#' + elemId).emit('fadeOut')
+    document.querySelector('#' + elemId).emit('fadeOut');
     setTimeout(function() {
          $('#' + elemId).attr('value', elemTextObj.textArr[elemTextObj.arrInd]);
-        document.querySelector('#' + elemId).emit('fadeIn')
+        document.querySelector('#' + elemId).emit('fadeIn');
     }, 2100);
-    textObj[elemId].arrInd = elemTextObj.arrInd + 1
+    textObj[elemId].arrInd = elemTextObj.arrInd + 1;
+    }
+}
+
+function introProceed() {
+    window.location = "/app";
 }
