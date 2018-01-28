@@ -42,3 +42,7 @@ function changeText(elemId) {
         textObj[elemId].arrInd = 0;
     }
 }
+
+function introProceed() {
+    window.location = "/app";
+}
