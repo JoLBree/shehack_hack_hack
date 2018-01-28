@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <title>My Page</title>
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+</head>
+
+<body>
+<a-scene>
+    <a-camera>
+        <a-cursor color="green" fuse="true" fuseTimeout="3000"></a-cursor>
+    </a-camera>
+
+    <a-assets>
+        <a-mixin id="text"
+                 text="align: center; width: 8; color: #FFF; wrap-count: 40; opacity: 1">
+        </a-mixin>
+    </a-assets>
+
+    <a-text id="titleText" mixin="text" visible="true" wrap-count="30" value="Welcome to Manage Reality" position="0 4.6 -5"></a-text>
+    <a-text id="introText" mixin="text" visible="true" position="0 1.7 -5"
+            value="This space is here to help you learn how to manage your own anxiety and help you learn how to help your loved ones. \n\nLook left or right to learn more about anxiety. \nOr look down for guided breathing to help you find your inner calm. \n\nRemember, you are not alone and this virtual reality pales in comparison to the bright future you have ahead of you."></a-text>
+
+    <a-text id="proceedText" mixin="text" visible="true" wrap-count="50" value="Focus on the square to proceed" position="-0.8 -1.5 -5"></a-text>
+    <a-plane position="1.8 -1.5 -5" rotation="0 0 -90" width="0.5" height="0.5" color="#0f6603" onclick="introProceed()"></a-plane>
+
+    <a-sky color="#3a3b42"></a-sky>
+
+</a-scene>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/scripts/aframing.js"></script>
+</body>
+</html>
